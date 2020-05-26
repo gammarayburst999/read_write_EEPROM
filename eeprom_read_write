@@ -1,0 +1,109 @@
+float a;
+
+float b;
+
+float h;
+
+int select;
+
+char junk = ' ';
+
+void setup()                    // run once, when the sketch starts
+
+{
+
+  Serial.begin(9600);           // set up Serial library at 9600 bps
+
+ 
+
+  Serial.println("Lets WRITE and READ EEPROM");  Serial.println("");
+
+  Serial.flush();
+
+}
+
+ 
+
+void loop()
+
+                 {
+
+                 Serial.println("Enter value 1 for read 2 for write");
+
+             while (Serial.available() == 0) ;  // Wait here until input buffer has a character
+
+  {
+
+     
+
+    select = Serial.parseFloat();        // new command in 1.0 forward
+
+    Serial.print("select = ");
+
+    Serial.println(select);
+
+    while (Serial.available() > 0)  // .parseFloat() can leave non-numeric characters
+
+    {
+
+    junk = Serial.read();
+
+    }      // clear the keyboard buffer
+
+  }
+
+ 
+
+if (select==1)                  
+
+{
+
+  Serial.println("Enter value for leg 'a', Press ENTER");
+
+  while (Serial.available() == 0) ;  // Wait here until input buffer has a character
+
+  {
+
+      //Side 1
+
+    a = Serial.parseFloat();        // new command in 1.0 forward
+
+    Serial.print("a = "); Serial.println(a, DEC);
+
+ 
+
+    while (Serial.available() > 0)  // .parseFloat() can leave non-numeric characters
+
+    { junk = Serial.read() ; }      // clear the keyboard buffer
+
+  }
+
+}
+
+                                else if(select==2)
+
+                                {
+
+  Serial.println("Enter value for leg 'b', Press ENTER");
+
+  while (Serial.available() == 0) ;
+
+  {
+
+    b = Serial.parseFloat();
+
+    Serial.print("b = "); Serial.println(b, DEC);
+
+    while (Serial.available() > 0)
+
+    {
+
+      junk = Serial.read() ;
+
+    }
+
+  }
+
+                                }
+
+}
